@@ -1,0 +1,5 @@
+lat,lon,coordinatePrecision,scientificNameID,scientificName,speciesKey,species,iucnRedListCategory
+48.1267,16.8926,0.001,,BOLD:AAA7409,5218786,Procyon lotor,
+50.86,6.06,0.01,,"Procyon lotor (Linnaeus, 1758)",5218786,Procyon lotor,LC
+52.52,6.26,0.01,,"Procyon lotor (Linnaeus, 1758)",5218786,Procyon lotor,LC
+30.133333,-83.116667,0.0166667,,"Procyon lotor (Linnaeus, 1758)",5218786,Procyon lotor,LC
