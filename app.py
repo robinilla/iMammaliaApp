@@ -3,6 +3,7 @@ import os
 import streamlit as st
 import pandas as pd
 import pydeck as pdk
+import numpy as np
 
 st.set_page_config(
     page_title="iMammalia App", page_icon="📊" #
@@ -11,6 +12,7 @@ st.set_page_config(
 #main_container=st.container()
 
 st.title('iMammalia App')
+st.write('Comparing data collected from citizen science versus data available in the Global Biodiversity Information Facilities (GBIF)')
 
 #load your data of iMammalia and create the list of species in it
 dm = pd.read_csv('imammalia.csv')
@@ -28,15 +30,15 @@ gbif_specie = [f for f in os.listdir('species') if f.startswith(specie.lower().r
 gbif_df = pd.read_csv(os.path.join('species', gbif_specie))
 
 estado_iucn = gbif_df['iucnRedListCategory'].unique()[0]
-st.metric('IUCN status', estado_iucn)
 
-st.metric('iMammalia registers', len(dm_specie))
-st.metric('GBIF registers', len(gbif_df))
+with st.container():
+    col1, col2, col3 = st.columns(3)
+    col1.metric('iMammalia registers', len(dm_specie))
+    col2.metric('GBIF registers of the species in the world', len(gbif_df))
+    col3.metric('IUCN status', estado_iucn)
 
 gbif_coords = gbif_df[['lon', 'lat']].dropna()
 dm_specie = dm_specie[['lon', 'lat']].dropna()
-
-# st.map(gbif_df)
 
 
 #gbif_icon = {
@@ -57,8 +59,8 @@ dm_specie = dm_specie[['lon', 'lat']].dropna()
 st.pydeck_chart(pdk.Deck(
      map_style='mapbox://styles/mapbox/light-v9',
      initial_view_state=pdk.ViewState(
-         latitude=55.5,
-         longitude=8,
+         latitude=56.5,
+         longitude=9,
          zoom=2.5
      ),
      layers=[
@@ -98,3 +100,6 @@ st.pydeck_chart(pdk.Deck(
          )
      ]
  ))
+
+
+
