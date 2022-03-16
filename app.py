@@ -16,6 +16,7 @@ st.write('Comparing data collected from citizen science versus data available in
 
 #load your data of iMammalia and create the list of species in it
 dm = pd.read_csv('imammalia.csv')
+dm = dm.loc[(dm['Record.status'] == 'V')]
 unique_species = dm['Taxon.accepted.name'].sort_values().unique()
 
 dm = dm.rename(columns={'long': 'lon'})
@@ -31,11 +32,21 @@ gbif_df = pd.read_csv(os.path.join('species', gbif_specie))
 
 estado_iucn = gbif_df['iucnRedListCategory'].unique()[0]
 
+st.markdown('[Information related with the species?](https://www.google.com/search?q='+specie.replace(" ", "+")+'+species)')
+st.markdown('[Contribute with more observation of the species](https://mammalnet.net/es/imammalia)')
+st.markdown('[Share your camera traps photos](https://www.mammalweb.org/en/login)')
+
+
 with st.container():
+    st.write('Species information')
     col1, col2, col3 = st.columns(3)
     col1.metric('iMammalia registers', len(dm_specie))
-    col2.metric('GBIF registers of the species in the world', len(gbif_df))
+    col2.metric('GBIF registers (in the world)', len(gbif_df))
     col3.metric('IUCN status', estado_iucn)
+    
+
+
+
 
 gbif_coords = gbif_df[['lon', 'lat']].dropna()
 dm_specie = dm_specie[['lon', 'lat']].dropna()
