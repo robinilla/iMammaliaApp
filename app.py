@@ -75,7 +75,8 @@ year_max=slider_range[1]
 #st.write(year_max)
 
 #gbif_coords = gbif_coords.loc[(gbif_coords['year'] => year_min) & gbif_coords['year']<=year_max]
-
+#gbif_coords = gbif_coords.loc[gbif_coords['coordinatePrecision'] <= 2000]
+#gbif_coords = gbif_coords.loc[gbif_coords['coordinateUncertaintyInMeters'] <= 2000]
 
 st.pydeck_chart(pdk.Deck(
      map_style='mapbox://styles/mapbox/light-v9',
