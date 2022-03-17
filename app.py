@@ -28,6 +28,8 @@ specie = st.selectbox('Select a species registered in Mammalnet', unique_species
 dm_specie = dm.loc[dm['Taxon.accepted.name'] == specie]
 
 #load your data of iMammalia and create the list of species in it
+gb_path = pd.read_csv('gbif_path.csv')
+
 gbif_specie = [f for f in os.listdir('species') if f.startswith(specie.lower().replace(' ', '_'))][0]
 gbif_df = pd.read_csv(os.path.join('species', gbif_specie))
 
@@ -37,20 +39,13 @@ st.markdown('[Information related with the species](https://www.google.com/searc
 st.markdown('[Contribute with more observation of the species](https://mammalnet.net/es/imammalia)')
 st.markdown('[Share your camera traps photos](https://www.mammalweb.org/en/login)')
 
-
-gbif_coords = gbif_df[['lon', 'lat']].dropna()
-dm_specie = dm_specie[['lon', 'lat']].dropna()
-
 with st.container():
     st.write('Species registers')
     col1, col2, col3 = st.columns(3)
     col1.metric('iMammalia registers', len(dm_specie))
-    col2.metric('GBIF registers (in the world)', len(gbif_coords))
+    col2.metric('GBIF registers (total in the world)', len(gbif_df))
     col3.metric('IUCN status', estado_iucn)
     
-
-
-
 #gbif_icon = {
     # Icon from Wikimedia, used the Creative Commons Attribution-Share Alike 3.0
     # Unported, 2.5 Generic, 2.0 Generic and 1.0 Generic licenses
@@ -71,12 +66,15 @@ slider_range=st.slider('Select year for GBIF observed data', min_value=1900, max
 year_min=slider_range[0]
 year_max=slider_range[1]
 
-#st.write(year_min)
-#st.write(year_max)
+gbif_df['year']=pd.to_numeric(gbif_df['year'])
+gbif_df = gbif_df.loc[(gbif_df['year'] >= year_min) & (gbif_df['year'] <= year_max)]
 
-#gbif_coords = gbif_coords.loc[(gbif_coords['year'] => year_min) & gbif_coords['year']<=year_max]
-#gbif_coords = gbif_coords.loc[gbif_coords['coordinatePrecision'] <= 2000]
-#gbif_coords = gbif_coords.loc[gbif_coords['coordinateUncertaintyInMeters'] <= 2000]
+#gbif_df = gbif_df.loc[gbif_df['coordinatePrecision'] <= 2000]
+#gbif_df = gbif_df.loc[gbif_df['coordinateUncertaintyInMeters'] <= 2000]
+
+gbif_coords = gbif_df[['lon', 'lat']].dropna()
+dm_specie = dm_specie[['lon', 'lat']].dropna()
+
 
 st.pydeck_chart(pdk.Deck(
      map_style='mapbox://styles/mapbox/light-v9',
@@ -123,7 +121,10 @@ st.pydeck_chart(pdk.Deck(
      ]
  ))
 
-st.markdown('_GBIF data showed correspond to a dataset downloaded the 2022-03-15, which doi is_ '+'download1[1,2]'+' _They have been filtered to a coordinate precision equal or below to 2000m. NA decimal Longitude/Latitude values cannot be shown and are not considered in the register count. The GBIF register count comprends between year_ '+str(year_min)+' _and year_ '+str(year_max)+' _selected in the slidebar._')
+
+doi=gb_path.loc[gb_path['spMammalnet']==specie]
+
+st.markdown('_GBIF data showed correspond to a dataset downloaded the 2022-03-15, which doi is_ '+doi['doi'][0]+' _They have been filtered to a coordinate precision equal or below to 2000m. NA decimal Longitude/Latitude values cannot be shown and are not considered in the register count. The GBIF register count comprends between year_ '+str(year_min)+' _and year_ '+str(year_max)+' _selected in the slidebar._')
 
 
 st.markdown('Aknowledges to [Álvaro Arredondo](https://github.com/arredond) for helping in the app development.')
