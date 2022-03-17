@@ -6,13 +6,14 @@ import pydeck as pdk
 import numpy as np
 
 st.set_page_config(
-    page_title="iMammalia App", page_icon="📊" #
+    page_title="Mammalnet", page_icon="🐾"
 )
 
 
+st.image('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
+#st.title('Mammalnet App')
+st.write('Comparing data collected from citizen science _versus_ data available in the Global Biodiversity Information Facilities (','[GBIF](https://www.gbif.org/)', ').')
 
-st.title('iMammalia App')
-st.write('Comparing data collected from citizen science versus data available in the Global Biodiversity Information Facilities (GBIF)')
 
 #load your data of iMammalia and create the list of species in it
 dm = pd.read_csv('imammalia.csv')
@@ -37,16 +38,17 @@ st.markdown('[Contribute with more observation of the species](https://mammalnet
 st.markdown('[Share your camera traps photos](https://www.mammalweb.org/en/login)')
 
 
+gbif_coords = gbif_df[['lon', 'lat']].dropna()
+dm_specie = dm_specie[['lon', 'lat']].dropna()
+
 with st.container():
     st.write('Species registers')
     col1, col2, col3 = st.columns(3)
     col1.metric('iMammalia registers', len(dm_specie))
-    col2.metric('GBIF registers (in the world)', len(gbif_df))
+    col2.metric('GBIF registers (in the world)', len(gbif_coords))
     col3.metric('IUCN status', estado_iucn)
     
 
-gbif_coords = gbif_df[['lon', 'lat']].dropna()
-dm_specie = dm_specie[['lon', 'lat']].dropna()
 
 
 #gbif_icon = {
@@ -69,14 +71,17 @@ slider_range=st.slider('Select year for GBIF observed data', min_value=1900, max
 year_min=slider_range[0]
 year_max=slider_range[1]
 
-st.write(year_min)
-st.write(year_max)
+#st.write(year_min)
+#st.write(year_max)
+
+#gbif_coords = gbif_coords.loc[(gbif_coords['year'] => year_min) & gbif_coords['year']<=year_max]
+
 
 st.pydeck_chart(pdk.Deck(
      map_style='mapbox://styles/mapbox/light-v9',
      initial_view_state=pdk.ViewState(
          latitude=56.5,
-         longitude=9,
+         longitude=9.5,
          zoom=2.5
      ),
      layers=[
@@ -117,4 +122,7 @@ st.pydeck_chart(pdk.Deck(
      ]
  ))
 
-st.markdown('_GBIF data showed correspond to a dataset downloaded the 2022-03-10, which doi is_ '+'download1[1,2]'+' _and has been filtered to a coordinate precision equal or below to 2000m_.')
+st.markdown('_GBIF data showed correspond to a dataset downloaded the 2022-03-15, which doi is_ '+'download1[1,2]'+' _They have been filtered to a coordinate precision equal or below to 2000m. NA decimal Longitude/Latitude values cannot be shown and are not considered in the register count. The GBIF register count comprends between year_ '+str(year_min)+' _and year_ '+str(year_max)+' _selected in the slidebar._')
+
+
+st.markdown('Aknowledges to [Álvaro Arredondo](https://github.com/arredond) for helping in the app development.')
