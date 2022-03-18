@@ -21,8 +21,6 @@ st.set_page_config(
 #st.get_option("theme.secondaryBackgroundColor")
 #st.get_option("theme.textColor")
 
-st.write(st.session_state['key'])
-
 #{[theme]
 # primaryColor = "#f63366"
 #backgroundColor = "#FFFFFF"
