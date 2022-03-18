@@ -16,7 +16,22 @@ st.set_page_config(
 #st.session_state.textColor = "#171b29"
 #st.session_state.is_dark_theme = True
 #st.session_state.first_time = True
-st.get_option
+#st.get_option("theme.primaryColor")
+#st.get_option("theme.backgroundColor")
+#st.get_option("theme.secondaryBackgroundColor")
+#st.get_option("theme.textColor")
+
+
+if chck:
+    primary_clr = st.get_option("theme.primaryColor")
+    txt_clr = st.get_option("theme.textColor")
+    # I want 3 colours to graph, so this is a red that matches the theme:
+    second_clr = "#d87c7c"
+else:
+    primary_clr = '#4c78a8'
+    second_clr = '#f58517'
+    txt_clr = '#e45756'
+
 
 
 st.image('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
