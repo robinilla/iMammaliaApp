@@ -9,18 +9,14 @@ st.set_page_config(
     page_title="Mammalnet", page_icon="🐾"
 )
 
+if not st.session_state:
+    st.session_state.primaryColor = "#27a5da"
+    st.session_state.backgroundColor = "#f7fbfd"
+    st.session_state.secondaryBackgroundColor = "#d6dcde"
+    st.session_state.textColor = "#171b29"
+    st.session_state.is_dark_theme = True
+    st.session_state.first_time = True
 
-# The preset Streamlit theme that your custom theme inherits from. One of "light" or "dark".
-base = "dark"
-
-primary_clr="#27a5da" # Primary accent color for interactive elements.
-
-# Background color for the main content area.
-backgroundColor="#f7fbfd"
-
-# Background color used for the sidebar and most interactive widgets.
-secondaryBackgroundColor="#d6dcde"
-txt_clr="#171b29" # Color used for almost all text.
 
 
 st.image('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
