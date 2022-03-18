@@ -89,7 +89,9 @@ else:
     gbif_df = gbif_df.loc[gbif_df['coordinateUncertaintyInMeters'] <= 2000]
 
 gbif_coords = gbif_df[['lon', 'lat']].dropna()
-dm_specie = dm_specie[['lon', 'lat']].dropna()
+#dm_specie = dm_specie[['lon', 'lat']].dropna()
+dm_specie = dm_specie.dropna(subset=['lon', 'lat'])
+dm_specie=dm_specie[['lon', 'lat', 'Recorded.by', 'Date.end']]
 
 col2.metric('GBIF registers (total in the world)', len(gbif_coords))
 col3.metric('IUCN status', estado_iucn)
@@ -108,7 +110,6 @@ col3.metric('IUCN status', estado_iucn)
 ####folium.CircleMarker(location=[dm_specie['lat'], dm_specie['lon']], radius =6, color="black", fill_color="yellow").add_to(m)
 ####m.add_circle_markers_from_xy(dm_specie, x="lon", y="lat", radius=5, color="yellow", fill_color="black", group="Mammalnet data")
 #m.to_streamlit()
-
 
 st.pydeck_chart(pdk.Deck(
      map_style='mapbox://styles/mapbox/light-v9',
@@ -152,8 +153,22 @@ st.pydeck_chart(pdk.Deck(
             get_fill_color=[235, 235, 66],
             get_position='[lon, lat]'
          )
-     ]
+     ],
+    tooltip={"html": "<b>Date: </b> {Date.end} <br /> "
+                  "<b>Recorded by: </b> {Recorded.by} <br /> "}
  ))
+
+
+from PIL import Image
+
+col4, col5 = st.columns(2)
+img4 = Image.new(mode = "RGB", size = (10, 10), color = (22, 175, 78))
+img5 = Image.new(mode = "RGB", size = (10, 10), color =(235, 235, 66))
+col4.write('GBIF data')
+col4.image(img4, width=10)
+col5.write('MammalNet data')
+col5.image(img5, width=10)
+
 
 doi=gb_path.loc[gb_path['spMammalnet']==specie]
 doi2=doi['doi']
