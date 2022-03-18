@@ -21,16 +21,15 @@ st.set_page_config(
 #st.get_option("theme.secondaryBackgroundColor")
 #st.get_option("theme.textColor")
 
+st.session_state['key'] = 'value'
 
-if chck:
-    primary_clr = st.get_option("theme.primaryColor")
-    txt_clr = st.get_option("theme.textColor")
-    # I want 3 colours to graph, so this is a red that matches the theme:
-    second_clr = "#d87c7c"
-else:
-    primary_clr = '#4c78a8'
-    second_clr = '#f58517'
-    txt_clr = '#e45756'
+if not st.session_state:
+    st.session_state.primaryColor = "#f63366"
+    st.session_state.backgroundColor = "#FFFFFF"
+    st.session_state.secondaryBackgroundColor = "#f0f2f6"
+    st.session_state.textColor = "#262730"
+    st.session_state.is_dark_theme = False
+    st.session_state.first_time = True
 
 
 
@@ -126,7 +125,7 @@ st.pydeck_chart(pdk.Deck(
      initial_view_state=pdk.ViewState(
          latitude=56.5,
          longitude=9.5,
-         zoom=2.5
+         zoom=2.25
      ),
      layers=[
          pdk.Layer(
