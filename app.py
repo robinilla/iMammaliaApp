@@ -10,6 +10,19 @@ st.set_page_config(
 )
 
 
+# The preset Streamlit theme that your custom theme inherits from. One of "light" or "dark".
+base = "dark"
+
+primary_clr="#27a5da" # Primary accent color for interactive elements.
+
+# Background color for the main content area.
+backgroundColor="#f7fbfd"
+
+# Background color used for the sidebar and most interactive widgets.
+secondaryBackgroundColor="#d6dcde"
+txt_clr="#171b29" # Color used for almost all text.
+
+
 st.image('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
 #st.title('Mammalnet App')
 st.write('Comparing data collected from citizen science _versus_ data available in the Global Biodiversity Information Facilities (','[GBIF](https://www.gbif.org/)', ').')
@@ -81,6 +94,22 @@ dm_specie = dm_specie[['lon', 'lat']].dropna()
 col2.metric('GBIF registers (total in the world)', len(gbif_coords))
 col3.metric('IUCN status', estado_iucn)
 
+
+#import leafmap
+#import folium
+
+#m = folium.Map(center=[50, 10], zoom_start=2.5)
+
+#for index, dm_specie in dm_specie.iterrows():
+#    location = [dm_specie['lat'], dm_specie['lon']]
+#    folium.Marker(location, radius =6, color="black", fill_color="yellow").add_to(m)
+#m
+
+####folium.CircleMarker(location=[dm_specie['lat'], dm_specie['lon']], radius =6, color="black", fill_color="yellow").add_to(m)
+####m.add_circle_markers_from_xy(dm_specie, x="lon", y="lat", radius=5, color="yellow", fill_color="black", group="Mammalnet data")
+#m.to_streamlit()
+
+
 st.pydeck_chart(pdk.Deck(
      map_style='mapbox://styles/mapbox/light-v9',
      initial_view_state=pdk.ViewState(
@@ -126,7 +155,6 @@ st.pydeck_chart(pdk.Deck(
      ]
  ))
 
-
 doi=gb_path.loc[gb_path['spMammalnet']==specie]
 doi2=doi['doi']
 
@@ -134,3 +162,4 @@ st.markdown('_GBIF data showed correspond to a dataset downloaded the 2022-03-15
 
 st.markdown('Aknowledges to [Álvaro Arredondo](https://github.com/arredond) for helping in the app development.')
 #st.markdown(f'<h1 style="color:#27A5DA;font-size:12px;">{"Aknowledges to [Álvaro Arredondo](https://github.com/arredond) for helping in the app development."}</h1>', unsafe_allow_html=True)
+
