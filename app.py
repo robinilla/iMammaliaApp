@@ -23,7 +23,7 @@ st.image('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', wi
 #st.title('Mammalnet App')
 st.write('Comparing data collected from citizen science _versus_ data available in the Global Biodiversity Information Facilities (','[GBIF](https://www.gbif.org/)', ').')
 
-"---"
+#"---"
 
 #load your data of iMammalia and create the list of species in it
 dm = pd.read_csv('imammalia.csv')
