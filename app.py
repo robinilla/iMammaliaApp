@@ -9,9 +9,6 @@ st.set_page_config(
     page_title="Mammalnet", page_icon="🐾"
 )
 
-import requests
-import utils
-
 # Init state. This is only run whenever a new session starts (i.e. each time a new
 # browser tab is opened).
 if not st.session_state:
@@ -21,9 +18,6 @@ if not st.session_state:
     st.session_state.textColor = "#262730"
     st.session_state.is_dark_theme = False
     st.session_state.first_time = True
-
-
-
 
 st.image('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
 #st.title('Mammalnet App')
