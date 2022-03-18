@@ -22,11 +22,12 @@ st.set_page_config(
 #st.get_option("theme.textColor")
 
 #st.session_state['key'] = 'value'
-{primaryColor = "#f63366"
+{[theme]
+ primaryColor = "#f63366"
 backgroundColor = "#FFFFFF"
-st.session_state['secondaryBackgroundColor'] = "#f0f2f6"
-st.session_state['textColor'] = "#262730"
-st.session_state['is_dark_theme'] = True
+secondaryBackgroundColor = "#f0f2f6"
+textColor = "#262730"
+is_dark_theme = True
 }
 
 #if not st.session_state:
