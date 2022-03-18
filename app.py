@@ -9,72 +9,27 @@ st.set_page_config(
     page_title="Mammalnet", page_icon="🐾"
 )
 
-#if not st.session_state:
-#st.session_state.primaryColor = "#27a5da"
-#st.session_state.backgroundColor = "#f7fbfd"
-#st.session_state.secondaryBackgroundColor = "#d6dcde"
-#st.session_state.textColor = "#171b29"
-#st.session_state.is_dark_theme = True
-#st.session_state.first_time = True
-#st.get_option("theme.primaryColor")
-#st.get_option("theme.backgroundColor")
-#st.get_option("theme.secondaryBackgroundColor")
-#st.get_option("theme.textColor")
+import requests
+import utils
 
-#{[theme]
-# primaryColor = "#f63366"
-#backgroundColor = "#FFFFFF"
-#secondaryBackgroundColor = "#f0f2f6"
-#textColor = "#262730"
-#is_dark_theme = True
-#}
-
-#if not st.session_state:
-#    st.session_state.primaryColor = "#f63366"
- #   st.session_state.backgroundColor = "#FFFFFF"
-  #  st.session_state.secondaryBackgroundColor = "#f0f2f6"
-   # st.session_state.textColor = "#262730"
-    #st.session_state.is_dark_theme = False
-    #st.session_state.first_time = True
-
-CONFIG_TEMPLATE = """
-[theme]
-primaryColor = "{}"
-backgroundColor = "{}"
-secondaryBackgroundColor = "{}"
-textColor = "{}"
-font = "sans serif"
-"""
-
-def clamp(x):
-    return max(0, min(x, 255))
+# Init state. This is only run whenever a new session starts (i.e. each time a new
+# browser tab is opened).
+if not st.session_state:
+    st.session_state.primaryColor = "#27a5da"
+    st.session_state.backgroundColor = "#f7fbfd"
+    st.session_state.secondaryBackgroundColor = "#f0f2f6"
+    st.session_state.textColor = "#262730"
+    st.session_state.is_dark_theme = False
+    st.session_state.first_time = True
 
 
-def rgb2hex(r, g, b):
-    return "#{0:02x}{1:02x}{2:02x}".format(clamp(r), clamp(g), clamp(b))
-
-
-def hex2rgb(h):
-    return tuple(int(h.lstrip("#")[i : i + 2], 16) for i in (0, 2, 4))
-
-
-def local_css(file_name: str) -> None:
-    """Loads a local .css file into streamlit."""
-    with open(file_name) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-        
-        
-        
-
-
-    
-    
 
 
 st.image('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
 #st.title('Mammalnet App')
 st.write('Comparing data collected from citizen science _versus_ data available in the Global Biodiversity Information Facilities (','[GBIF](https://www.gbif.org/)', ').')
 
+"---"
 
 #load your data of iMammalia and create the list of species in it
 dm = pd.read_csv('imammalia.csv')
@@ -100,12 +55,15 @@ st.markdown('[Information related with the species](https://www.google.com/searc
 st.markdown('[Contribute with more observation of the species](https://mammalnet.net/es/imammalia)')
 st.markdown('[Share your camera traps photos](https://www.mammalweb.org/en/login)')
 
+"---"
+
 with st.container():
     st.write('Species registers')
     col1, col2, col3 = st.columns(3)
     col1.metric('iMammalia registers', len(dm_specie))
     
-    
+"---"
+
 #gbif_icon = {
     # Icon from Wikimedia, used the Creative Commons Attribution-Share Alike 3.0
     # Unported, 2.5 Generic, 2.0 Generic and 1.0 Generic licenses
