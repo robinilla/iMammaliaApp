@@ -61,7 +61,7 @@ with st.container():
 
 st.subheader('Distribution of '+specie)
 slider_range=st.slider('Select year for GBIF observed data', min_value=1900, max_value=2022, 
-                       value=[2018, 2022])
+                       value=[1993, 2022])
 year_min=slider_range[0]
 year_max=slider_range[1]
 
