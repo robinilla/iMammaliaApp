@@ -175,6 +175,8 @@ doi2=doi['doi']
 
 st.markdown('_GBIF data showed correspond to a dataset downloaded the 2022-03-15, which doi is_ '+doi2.iloc[0]+'. _They have been filtered to a coordinate precision or coordinate uncertainity in meters equal or below to 2000m. NA decimal Longitude/Latitude values cannot be shown and are not considered in the register count. The GBIF register count comprends between year_ '+str(year_min)+' _and year_ '+str(year_max)+' _selected in the slidebar._')
 
+""
+""
+
 st.markdown('Aknowledges to [Álvaro Arredondo](https://github.com/arredond) for helping in the app development.')
-#st.markdown(f'<h1 style="color:#27A5DA;font-size:12px;">{"Aknowledges to [Álvaro Arredondo](https://github.com/arredond) for helping in the app development."}</h1>', unsafe_allow_html=True)
 
