@@ -21,15 +21,21 @@ st.set_page_config(
 #st.get_option("theme.secondaryBackgroundColor")
 #st.get_option("theme.textColor")
 
-st.session_state['key'] = 'value'
+#st.session_state['key'] = 'value'
+{primaryColor = "#f63366"
+backgroundColor = "#FFFFFF"
+st.session_state['secondaryBackgroundColor'] = "#f0f2f6"
+st.session_state['textColor'] = "#262730"
+st.session_state['is_dark_theme'] = True
+}
 
-if not st.session_state:
-    st.session_state.primaryColor = "#f63366"
-    st.session_state.backgroundColor = "#FFFFFF"
-    st.session_state.secondaryBackgroundColor = "#f0f2f6"
-    st.session_state.textColor = "#262730"
-    st.session_state.is_dark_theme = False
-    st.session_state.first_time = True
+#if not st.session_state:
+#    st.session_state.primaryColor = "#f63366"
+ #   st.session_state.backgroundColor = "#FFFFFF"
+  #  st.session_state.secondaryBackgroundColor = "#f0f2f6"
+   # st.session_state.textColor = "#262730"
+    #st.session_state.is_dark_theme = False
+    #st.session_state.first_time = True
 
 
 
