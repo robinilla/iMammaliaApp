@@ -43,8 +43,7 @@ with st.container():
     st.write('Species registers')
     col1, col2, col3 = st.columns(3)
     col1.metric('iMammalia registers', len(dm_specie))
-    col2.metric('GBIF registers (total in the world)', len(gbif_df))
-    col3.metric('IUCN status', estado_iucn)
+    
     
 #gbif_icon = {
     # Icon from Wikimedia, used the Creative Commons Attribution-Share Alike 3.0
@@ -79,6 +78,8 @@ else:
 gbif_coords = gbif_df[['lon', 'lat']].dropna()
 dm_specie = dm_specie[['lon', 'lat']].dropna()
 
+col2.metric('GBIF registers (total in the world)', len(gbif_coords))
+col3.metric('IUCN status', estado_iucn)
 
 st.pydeck_chart(pdk.Deck(
      map_style='mapbox://styles/mapbox/light-v9',
@@ -129,7 +130,7 @@ st.pydeck_chart(pdk.Deck(
 doi=gb_path.loc[gb_path['spMammalnet']==specie]
 doi2=doi['doi']
 
-st.markdown('_GBIF data showed correspond to a dataset downloaded the 2022-03-15, which doi is_'+doi2.iloc[0]+'_They have been filtered to a coordinate precision equal or below to 2000m. NA decimal Longitude/Latitude values cannot be shown and are not considered in the register count. The GBIF register count comprends between year_ '+str(year_min)+' _and year_ '+str(year_max)+' _selected in the slidebar._')
+st.markdown('_GBIF data showed correspond to a dataset downloaded the 2022-03-15, which doi is_ '+doi2.iloc[0]+'. _They have been filtered to a coordinate precision or coordinate uncertainity in meters equal or below to 2000m. NA decimal Longitude/Latitude values cannot be shown and are not considered in the register count. The GBIF register count comprends between year_ '+str(year_min)+' _and year_ '+str(year_max)+' _selected in the slidebar._')
 
 st.markdown('Aknowledges to [Álvaro Arredondo](https://github.com/arredond) for helping in the app development.')
 #st.markdown(f'<h1 style="color:#27A5DA;font-size:12px;">{"Aknowledges to [Álvaro Arredondo](https://github.com/arredond) for helping in the app development."}</h1>', unsafe_allow_html=True)
