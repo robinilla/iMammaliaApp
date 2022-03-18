@@ -4,6 +4,7 @@ import streamlit as st
 import pandas as pd
 import pydeck as pdk
 import numpy as np
+from PIL import Image
 
 st.set_page_config(
     page_title="Mammalnet", page_icon="🐾"
@@ -111,6 +112,12 @@ col3.metric('IUCN status', estado_iucn)
 ####m.add_circle_markers_from_xy(dm_specie, x="lon", y="lat", radius=5, color="yellow", fill_color="black", group="Mammalnet data")
 #m.to_streamlit()
 
+im = Image.open("C://Users/Sonia.Illanas/Documents/PythoniMammalia/GBIF.jpg") 
+gbif_coords["icon_data"] = None
+for i in gbif_coords.index:
+    gbif_coords["icon_data"][i] = im
+
+
 st.pydeck_chart(pdk.Deck(
      map_style='mapbox://styles/mapbox/light-v9',
      initial_view_state=pdk.ViewState(
@@ -119,25 +126,32 @@ st.pydeck_chart(pdk.Deck(
          zoom=2.25
      ),
      layers=[
+#         pdk.Layer(
+#            'ScatterplotLayer',
+#            data=gbif_coords,
+  #         pickable=True,
+  #         opacity=0.1,
+  #         stroked=True,
+  #         filled=True,
+  #         radius_scale=6,
+  #         radius_min_pixels=5,
+  #         radius_max_pixels=100,
+  #         line_width_min_pixels=1,
+  #         get_line_color=[0, 0, 0],
+  #         get_fill_color=[22, 175, 78],
+  #         get_position='[lon, lat]'
+  #      ),
+
          pdk.Layer(
-            'ScatterplotLayer',
-           # type='IconLayer',
-            data=gbif_coords,
-            #get_icon="gbif_icon",
-            #get_size=4,
-            #size_scale=15,
-            pickable=True,
-            opacity=0.1,
-            stroked=True,
-            filled=True,
-            radius_scale=6,
-            radius_min_pixels=5,
-            radius_max_pixels=100,
-            line_width_min_pixels=1,
-            get_line_color=[0, 0, 0],
-            get_fill_color=[22, 175, 78],
-            get_position='[lon, lat]'
+             type="IconLayer",
+             data=gbif_coords,
+             get_icon="icon_data",
+             get_size=4,
+             size_scale=15,
+             get_position=["lon", "lat"],
+             pickable=True
          ),
+
          pdk.Layer(
             'ScatterplotLayer',
             data=dm_specie,
@@ -159,7 +173,7 @@ st.pydeck_chart(pdk.Deck(
  ))
 
 
-from PIL import Image
+
 
 col4, col5 = st.columns(2)
 img4 = Image.new(mode = "RGB", size = (10, 10), color = (22, 175, 78))
