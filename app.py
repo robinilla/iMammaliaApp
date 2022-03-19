@@ -32,10 +32,6 @@ if not st.session_state:
     st.session_state.is_dark_theme = True
     st.session_state.first_time = True
 
-""
-
-"---"
-
 # Show current theme colors.
 locked = []
 #columns = st.columns(4)
