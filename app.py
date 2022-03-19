@@ -33,9 +33,8 @@ if not st.session_state:
     st.session_state.first_time = True
 
 # Show current theme colors.
-locked = []
-#columns = st.columns(4)
-labels = ["backgroundColor", "secondaryBackgroundColor", "primaryColor", "textColor"]
+#locked = []
+#labels = ["backgroundColor", "secondaryBackgroundColor", "primaryColor", "textColor"]
 
 def apply_theme_from_session_state():
     """Retrieve theme from session state and apply it to streamlit config."""
@@ -49,14 +48,9 @@ def apply_theme_from_session_state():
         )
         st.config.set_option("theme.textColor", st.session_state.textColor)
 
-        # Trigger manual rerun (required to actually apply the theme to the app).
-        st.experimental_rerun()
+        st.experimental_rerun() # Trigger manual rerun (required to actually apply the theme to the app).
 
 apply_theme_from_session_state()
-
-
-
-
 
 
 st.image('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
@@ -129,7 +123,6 @@ else:
     gbif_df = gbif_df.loc[gbif_df['coordinateUncertaintyInMeters'] <= 2000]
 
 gbif_coords = gbif_df[['lon', 'lat']].dropna()
-#dm_specie = dm_specie[['lon', 'lat']].dropna()
 dm_specie = dm_specie.dropna(subset=['lon', 'lat'])
 dm_specie=dm_specie[['lon', 'lat', 'Recorded.by', 'Date.end']]
 
