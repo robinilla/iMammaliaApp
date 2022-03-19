@@ -158,7 +158,8 @@ from PIL import Image
 col4, col5 = st.columns([0.35, 0.65])
 img4 = Image.new(mode = "RGB", size = (10, 10), color = (22, 175, 78))
 img5 = Image.new(mode = "RGB", size = (10, 10), color =(235, 235, 66))
-col4.st.markdown('GBIF data'+ image(img4, width=10))
+col4.write('GBIF data')
+col4.image(img4, width=10)
 col5.write('MammalNet data')
 col5.image(img5, width=10)
 
