@@ -4,7 +4,7 @@ import os
 import streamlit as st
 import pandas as pd
 import pydeck as pdk
-import numpy as np
+#import numpy as np
 
 from PIL import Image, ImageOps
 
