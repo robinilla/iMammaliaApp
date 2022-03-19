@@ -10,6 +10,7 @@ streamlit = "*"
 #matplotlib = "*"
 #watchdog = "*"
 pydeck= "*"
+pandas= "*"
 
 [dev-packages]
 black = "*"
