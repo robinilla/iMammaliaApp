@@ -132,22 +132,22 @@ st.pydeck_chart(pdk.Deck(
              get_fill_color=[22, 175, 78],
              get_position='[lon, lat]'
           ),
-         pdk.Layer(
-            'ScatterplotLayer',
-            data=dm_specie,
-            pickable=True,
-            opacity=0.2,
-            stroked=True,
-            filled=True,
-            radius_scale=5,
-            radius_min_pixels=5,
-            radius_max_pixels=100,
-            line_width_min_pixels=1,
-            get_line_color=[0, 0, 0],
-            get_fill_color=[235, 235, 66],
-            get_position='[lon, lat]'
-         )
-     ],
+         #pdk.Layer(
+         #   'ScatterplotLayer',
+         #   data=dm_specie,
+         #   pickable=True,
+         #   opacity=0.2,
+         #   stroked=True,
+         #   filled=True,
+         #   radius_scale=5,
+         #   radius_min_pixels=5,
+         #   radius_max_pixels=100,
+         #   line_width_min_pixels=1,
+         #   get_line_color=[0, 0, 0],
+         #   get_fill_color=[235, 235, 66],
+         #   get_position='[lon, lat]'
+         #)
+     ],#
     tooltip={"html": "<b>Date: </b> {Date.end} <br /> "
                   "<b>Recorded by: </b> {Recorded.by} <br /> "}
  ))
