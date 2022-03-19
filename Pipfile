@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 pillow = "*"
-streamlit = "0.84"
+streamlit = "*"
 colorthief = "*"
 matplotlib = "*"
 watchdog = "*"
@@ -13,8 +13,8 @@ watchdog = "*"
 [dev-packages]
 black = "*"
 
-[requires]
-python_version = "3.8"
+#[requires]
+#python_version = "3.8"
 
 [pipenv]
 allow_prereleases = true
