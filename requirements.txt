@@ -2,3 +2,5 @@ pandas
 pydeck
 streamlit
 PIL
+Image 
+ImageOps
