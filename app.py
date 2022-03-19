@@ -41,6 +41,8 @@ st.write('Comparing data collected from citizen science _versus_ data available 
 #load your data of iMammalia and create the list of species in it
 dm = pd.read_csv('imammalia.csv', encoding='latin-1')
 dm = dm.loc[(dm['Record.status'] == 'V')]
+dm=dm.loc[(dm['Taxon.accepted.name'] != 'Sciurus meridionalis') & (dm['Taxon.accepted.name'] != 'Arvicola terrestris') & (dm['Taxon.accepted.name'] != 'Herpestes auropunctatus') & (dm['Taxon.accepted.name'] != 'Clethrionomys glareolus')]
+dm.loc[dm['Taxon.accepted.name'] == 'Mus domesticus', 'Taxon.accepted.name'] = 'Mus musculus'
 unique_species = dm['Taxon.accepted.name'].sort_values().unique()
 
 dm = dm.rename(columns={'long': 'lon'})
@@ -94,7 +96,7 @@ year_max=slider_range[1]
 gbif_df['year']=pd.to_numeric(gbif_df['year'])
 gbif_df = gbif_df.loc[(gbif_df['year'] >= year_min) & (gbif_df['year'] <= year_max)]
 
-coords_options=['coordinatePrecision', 'coordinateUncertaintyInMeters']
+coords_options=['coordinateUncertaintyInMeters', 'coordinatePrecision']
 page=st.radio('Select field for GBIF coordinate precision:', coords_options)
 if page == 'coordinatePrecision':
     gbif_df = gbif_df.loc[gbif_df['coordinatePrecision'] <= 2000]
@@ -104,7 +106,7 @@ else:
 gbif_coords = gbif_df[['lon', 'lat']].dropna()
 dm_specie = dm_specie.dropna(subset=['lon', 'lat'])
 dm_specie=dm_specie[['lon', 'lat', 'Recorded.by', 'Date.end']]
-st.write(dm_specie)
+#st.write(dm_specie)
 
 col2.metric('GBIF registers (total in the world)', len(gbif_coords))
 col3.metric('IUCN status', estado_iucn)
@@ -132,22 +134,22 @@ st.pydeck_chart(pdk.Deck(
              get_fill_color=[22, 175, 78],
              get_position='[lon, lat]'
           ),
-         #pdk.Layer(
-         #   'ScatterplotLayer',
-         #   data=dm_specie,
-         #   pickable=True,
-         #   opacity=0.2,
-         #   stroked=True,
-         #   filled=True,
-         #   radius_scale=5,
-         #   radius_min_pixels=5,
-         #   radius_max_pixels=100,
-         #   line_width_min_pixels=1,
-         #   get_line_color=[0, 0, 0],
-         #   get_fill_color=[235, 235, 66],
-         #   get_position='[lon, lat]'
-         #)
-     ],#
+         pdk.Layer(
+            'ScatterplotLayer',
+            data=dm_specie,
+            pickable=True,
+            opacity=0.2,
+            stroked=True,
+            filled=True,
+            radius_scale=5,
+            radius_min_pixels=5,
+            radius_max_pixels=100,
+            line_width_min_pixels=1,
+            get_line_color=[0, 0, 0],
+            get_fill_color=[235, 235, 66],
+            get_position='[lon, lat]'
+         )
+     ],
     tooltip={"html": "<b>Date: </b> {Date.end} <br /> "
                   "<b>Recorded by: </b> {Recorded.by} <br /> "}
  ))
