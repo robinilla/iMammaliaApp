@@ -33,8 +33,7 @@ if not st.session_state:
     st.session_state.first_time = True
 
 
-st.header('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
-#st.title('Mammalnet App')
+st.image('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
 st.write('Comparing data collected from citizen science _versus_ data available in the Global Biodiversity Information Facilities (','[GBIF](https://www.gbif.org/)', ').')
 
 #"---"
