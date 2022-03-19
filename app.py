@@ -33,24 +33,7 @@ if not st.session_state:
     st.session_state.first_time = True
 
 
-#def apply_theme_from_session_state():
-#    """Retrieve theme from session state and apply it to streamlit config."""
-#    # Only apply if theme in state differs from the current config. This is important
-#    # to not trigger rerun repeatedly.
-#    if st.config.get_option("theme.primaryColor") != st.session_state.primaryColor:
-#        st.config.set_option("theme.primaryColor", st.session_state.primaryColor)
-#        st.config.set_option("theme.backgroundColor", st.session_state.backgroundColor)
-#        st.config.set_option(
-#            "theme.secondaryBackgroundColor", st.session_state.secondaryBackgroundColor
-#        )
-#        st.config.set_option("theme.textColor", st.session_state.textColor)
-#
-#        st.experimental_rerun() # Trigger manual rerun (required to actually apply the theme to the app).
-#
-#apply_theme_from_session_state()
-
-
-st.image('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
+st.header('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
 #st.title('Mammalnet App')
 st.write('Comparing data collected from citizen science _versus_ data available in the Global Biodiversity Information Facilities (','[GBIF](https://www.gbif.org/)', ').')
 
