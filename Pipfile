@@ -6,9 +6,9 @@ name = "pypi"
 [packages]
 pillow = "*"
 streamlit = "*"
-colorthief = "*"
-matplotlib = "*"
-watchdog = "*"
+#colorthief = "*"
+#matplotlib = "*"
+#watchdog = "*"
 
 [dev-packages]
 black = "*"
