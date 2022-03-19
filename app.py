@@ -39,7 +39,7 @@ st.write('Comparing data collected from citizen science _versus_ data available 
 #"---"
 
 #load your data of iMammalia and create the list of species in it
-dm = pd.read_csv('imammalia.csv', encoding='utf-8')
+dm = pd.read_csv('imammalia.csv', encoding='latin-1')
 dm = dm.loc[(dm['Record.status'] == 'V')]
 unique_species = dm['Taxon.accepted.name'].sort_values().unique()
 
