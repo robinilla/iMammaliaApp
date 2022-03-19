@@ -1,23 +1,67 @@
 import os
 
+#general libraries for the package
 import streamlit as st
 import pandas as pd
 import pydeck as pdk
 import numpy as np
 
+#libraries for define theme
+import requests
+from pathlib import Path
+import random
+from PIL import Image, ImageOps
+
+import utils
+
 st.set_page_config(
     page_title="Mammalnet", page_icon="🐾"
 )
+
+#Define color theme
+
+utils.local_css("local_styles.css")
 
 # Init state. This is only run whenever a new session starts (i.e. each time a new
 # browser tab is opened).
 if not st.session_state:
     st.session_state.primaryColor = "#27a5da"
     st.session_state.backgroundColor = "#f7fbfd"
-    st.session_state.secondaryBackgroundColor = "#f0f2f6"
-    st.session_state.textColor = "#262730"
-    st.session_state.is_dark_theme = False
+    st.session_state.secondaryBackgroundColor = "#d6dcde"
+    st.session_state.textColor = "#171b29"
+    st.session_state.is_dark_theme = True
     st.session_state.first_time = True
+
+""
+
+"---"
+
+# Show current theme colors.
+locked = []
+#columns = st.columns(4)
+labels = ["backgroundColor", "secondaryBackgroundColor", "primaryColor", "textColor"]
+
+def apply_theme_from_session_state():
+    """Retrieve theme from session state and apply it to streamlit config."""
+    # Only apply if theme in state differs from the current config. This is important
+    # to not trigger rerun repeatedly.
+    if st.config.get_option("theme.primaryColor") != st.session_state.primaryColor:
+        st.config.set_option("theme.primaryColor", st.session_state.primaryColor)
+        st.config.set_option("theme.backgroundColor", st.session_state.backgroundColor)
+        st.config.set_option(
+            "theme.secondaryBackgroundColor", st.session_state.secondaryBackgroundColor
+        )
+        st.config.set_option("theme.textColor", st.session_state.textColor)
+
+        # Trigger manual rerun (required to actually apply the theme to the app).
+        st.experimental_rerun()
+
+apply_theme_from_session_state()
+
+
+
+
+
 
 st.image('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
 #st.title('Mammalnet App')
@@ -157,7 +201,7 @@ st.pydeck_chart(pdk.Deck(
 
 from PIL import Image
 
-col4, col5 = st.columns(2)
+col4, col5 = st.columns([0.35, 0.65])
 img4 = Image.new(mode = "RGB", size = (10, 10), color = (22, 175, 78))
 img5 = Image.new(mode = "RGB", size = (10, 10), color =(235, 235, 66))
 col4.write('GBIF data')
