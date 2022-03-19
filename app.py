@@ -9,7 +9,7 @@ import numpy as np
 #libraries for define theme
 import requests
 from pathlib import Path
-import random
+#import random
 from PIL import Image, ImageOps
 
 import utils
@@ -155,7 +155,7 @@ st.pydeck_chart(pdk.Deck(
  ))
 
 
-from PIL import Image
+
 
 col4, col5 = st.columns([0.35, 0.65])
 img4 = Image.new(mode = "RGB", size = (10, 10), color = (22, 175, 78))
