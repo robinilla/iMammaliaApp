@@ -13,27 +13,24 @@ st.set_page_config(
 )
 
 ##Define color theme
-##libraries for define theme
-#import requests
-#from pathlib import Path
-#import random
-#
-#
-#import utils
-#
-#
-#utils.local_css("local_styles.css")
-#
-## Init state. This is only run whenever a new session starts (i.e. each time a new
-## browser tab is opened).
-#if not st.session_state:
-#    st.session_state.primaryColor = "#27a5da"
-#    st.session_state.backgroundColor = "#f7fbfd"
-#    st.session_state.secondaryBackgroundColor = "#d6dcde"
-#    st.session_state.textColor = "#171b29"
-#    st.session_state.is_dark_theme = True
-#    st.session_state.first_time = True
-#
+#libraries for define theme
+import requests
+from pathlib import Path
+import random
+import utils
+
+utils.local_css("local_styles.css")
+
+# Init state. This is only run whenever a new session starts (i.e. each time a new
+# browser tab is opened).
+if not st.session_state:
+    st.session_state.primaryColor = "#27a5da"
+    st.session_state.backgroundColor = "#f7fbfd"
+    st.session_state.secondaryBackgroundColor = "#d6dcde"
+    st.session_state.textColor = "#171b29"
+    st.session_state.is_dark_theme = True
+    st.session_state.first_time = True
+
 
 st.image('https://mammalnet.net/wp-content/uploads/2021/04/cropped-logo.png', width=400)
 st.write('Comparing data collected from citizen science _versus_ data available in the Global Biodiversity Information Facilities (','[GBIF](https://www.gbif.org/)', ').')
@@ -75,20 +72,6 @@ with st.container():
     
 "---"
 
-#gbif_icon = {
-    # Icon from Wikimedia, used the Creative Commons Attribution-Share Alike 3.0
-    # Unported, 2.5 Generic, 2.0 Generic and 1.0 Generic licenses
- #   "url": "https://www.gbif.org/favicon.ico",
-  #  "width": 25,
-   # "height": 25,
-    #"anchorY": 25,
-#}
-
-#gbif_coords["gbif_icon"] = None
-#for i in gbif_coords.index:
-#   gbif_coords["gbif_icon"][i] = gbif_icon
-
-
 st.subheader('Distribution of '+specie)
 slider_range=st.slider('Select year for GBIF observed data', min_value=1900, max_value=2022, 
                        value=[1993, 2022])
@@ -107,11 +90,13 @@ else:
 
 gbif_coords = gbif_df[['lon', 'lat']].dropna()
 dm_specie = dm_specie.dropna(subset=['lon', 'lat'])
-dm_specie=dm_specie[['lon', 'lat', 'Recorded.by', 'Date.end']]
-#st.write(dm_specie)
+#dm_specie=dm_specie[['lon', 'lat', 'Recorded.by', 'Date.end']]
+dm_specie=dm_specie[['lon', 'lat']]
 
 col2.metric('GBIF registers (total in the world)', len(gbif_coords))
 col3.metric('IUCN status', estado_iucn)
+
+#st.write(dm_specie)
 
 st.pydeck_chart(pdk.Deck(
      map_style='mapbox://styles/mapbox/light-v9',
@@ -152,8 +137,8 @@ st.pydeck_chart(pdk.Deck(
             get_position='[lon, lat]'
          )
      ],
-    tooltip={"html": "<b>Date: </b> {Date.end} <br /> "
-                  "<b>Recorded by: </b> {Recorded.by} <br /> "}
+    #tooltip={"html": "<b>Date: </b> {Date.end} <br /> "
+    #              "<b>Recorded by: </b> {Recorded.by} <br /> "}
  ))
 
 
