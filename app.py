@@ -9,7 +9,7 @@ import numpy as np
 #libraries for define theme
 import requests
 from pathlib import Path
-#import random
+import random
 from PIL import Image, ImageOps
 
 import utils
