@@ -1,23 +1,23 @@
-[[source]]
-url = "https://pypi.org/simple"
-verify_ssl = true
-name = "pypi"
-
-[packages]
-pillow = "*"
-streamlit = "*"
-colorthief = "*"
-matplotlib = "*"
-watchdog = "*"
-
-[dev-packages]
-black = "*"
-
-[requires]
-python_version = "3.8"
-
-[pipenv]
-allow_prereleases = true
+#[[source]]
+#url = "https://pypi.org/simple"
+#verify_ssl = true
+#name = "pypi"
+#
+#[packages]
+#pillow = "*"
+#streamlit = "*"
+#colorthief = "*"
+#matplotlib = "*"
+#watchdog = "*"
+#
+#[dev-packages]
+#black = "*"
+#
+#[requires]
+#python_version = "3.8"
+#
+#[pipenv]
+#allow_prereleases = true
 
 [theme]
 primaryColor="#27a5da"
