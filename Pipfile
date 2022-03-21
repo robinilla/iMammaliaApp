@@ -6,17 +6,17 @@ name = "pypi"
 [packages]
 pillow = "*"
 streamlit = "*"
-#colorthief = "*"
-#matplotlib = "*"
-#watchdog = "*"
-pydeck= "*"
-pandas= "*"
+colorthief = "*"
+matplotlib = "*"
+watchdog = "*"
+pydeck="*"
+pandas="*"
 
 [dev-packages]
 black = "*"
 
 [requires]
-python_version = "3.7.12"
+python_version = "3.8"
 
 [pipenv]
 allow_prereleases = true
