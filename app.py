@@ -72,20 +72,20 @@ with st.container():
 "---"
 
 st.subheader('Distribution of '+specie)
-slider_range=st.slider('Select year for GBIF observed data', min_value=1900, max_value=2022, 
-                       value=[1993, 2022])
+slider_range=st.slider('Select year for GBIF observed data', min_value=2000, max_value=2022, 
+                       value=[2000, 2022])
 year_min=slider_range[0]
 year_max=slider_range[1]
 
 gbif_df['year']=pd.to_numeric(gbif_df['year'])
 gbif_df = gbif_df.loc[(gbif_df['year'] >= year_min) & (gbif_df['year'] <= year_max)]
 
-coords_options=['coordinateUncertaintyInMeters', 'coordinatePrecision']
-page=st.radio('Select field for GBIF coordinate precision:', coords_options)
-if page == 'coordinatePrecision':
-    gbif_df = gbif_df.loc[gbif_df['coordinatePrecision'] <= 2000]
-else:
-    gbif_df = gbif_df.loc[gbif_df['coordinateUncertaintyInMeters'] <= 2000]
+#coords_options=['coordinateUncertaintyInMeters', 'coordinatePrecision']
+#page=st.radio('Select field for GBIF coordinate precision:', coords_options)
+#if page == 'coordinatePrecision':
+#    gbif_df = gbif_df.loc[gbif_df['coordinatePrecision'] <= 2000]
+#else:
+gbif_df = gbif_df.loc[gbif_df['coordinateUncertaintyInMeters'] <= 2000]
 
 gbif_coords = gbif_df[['lon', 'lat']].dropna()
 dm_specie = dm_specie.dropna(subset=['lon', 'lat'])
