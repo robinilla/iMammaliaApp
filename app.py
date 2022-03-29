@@ -4,8 +4,6 @@ import os
 import streamlit as st
 import pandas as pd
 import pydeck as pdk
-#import numpy as np
-
 from PIL import Image, ImageOps
 
 st.set_page_config(
@@ -120,8 +118,6 @@ st.pydeck_chart(pdk.Deck(
     #tooltip={"html": "<b>Date: </b> {Date.end} <br /> "
     #              "<b>Recorded by: </b> {Recorded.by} <br /> "}
  ))
-
-
 
 
 col4, col5 = st.columns([0.35, 0.65])
