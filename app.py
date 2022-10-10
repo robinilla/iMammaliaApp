@@ -71,7 +71,9 @@ dm_specie = dm_specie.dropna(subset=['lon', 'lat'])
 #dm_specie=dm_specie[['lon', 'lat', 'Recorded.by', 'Date.end']]
 dm_specie=dm_specie[['lon', 'lat']]
 
-col2.metric('GBIF registers (total in the world)', len(gbif_coords))
+gbif_coords_eu = gbif_coords.loc[(gbif_coords['lon'] >= -25.7) & (gbif_coords['lon'] <= 50.7) & (gbif_coords['lat'] >= 35.2) & (gbif_coords['lat'] <= 71.2)] 
+
+col2.metric('GBIF registers (total in Europe)', len(gbif_coords_eu))
 col3.metric('IUCN status', estado_iucn)
 
 #st.write(dm_specie)
